@@ -1,0 +1,6 @@
+@SmartPortfolioMonitor_HostAddress = http://localhost:5211
+
+GET {{SmartPortfolioMonitor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
