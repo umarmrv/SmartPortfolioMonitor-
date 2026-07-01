@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("6c5e3f62-2042-407d-83d2-109498466a55")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartPortfolioMonitor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+026f0583315ca5ee5710d9c871bf590998b00930")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartPortfolioMonitor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartPortfolioMonitor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
