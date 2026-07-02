@@ -35,7 +35,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddHttpClient<IPriceFetcherService, PriceFetcherService>(client =>
 {
     // Задаем базовый адрес для всех будущих запросов этого сервиса
-    client.BaseAddress = new Uri("https://min-api.cryptocompare.com/");
+    // client.BaseAddress = new Uri("https://min-api.cryptocompare.com/");
     
     // Предохранитель: если внешнее API зависнет, мы разорвем соединение через 10 секунд
     client.Timeout = TimeSpan.FromSeconds(10);

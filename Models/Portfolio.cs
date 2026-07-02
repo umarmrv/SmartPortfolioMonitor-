@@ -3,7 +3,7 @@ namespace SmartPortfolioMonitor.Models;
 public class Portfolio
 {
     public int Id { get; set; }
-    public required string Name { get; set; } // Например, "Моя заначка" или "Крипта"
+    public string Name { get; set; } // Например, "Моя заначка" или "Крипта"
     
     public int UserId { get; set; }
     public User? User { get; set; }

@@ -5,7 +5,7 @@ public class Transaction
     public int Id { get; set; }
     
     // Тикер актива: "BTC", "USD", "TJS"
-    public required string Ticker { get; set; } 
+    public string Ticker { get; set; } 
     
     // Количество актива (например: 0.2 или 1500)
     public decimal Amount { get; set; } 

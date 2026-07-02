@@ -1,0 +1,207 @@
+2026-07-02 09:59:58.246 +05:00 [INF] Application is shutting down...
+2026-07-02 10:00:41.416 +05:00 [INF] Запуск сервера Smart Portfolio Monitor...
+2026-07-02 10:00:41.506 +05:00 [INF] Now listening on: http://localhost:5211
+2026-07-02 10:00:41.509 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-02 10:00:41.509 +05:00 [INF] Hosting environment: Development
+2026-07-02 10:00:41.509 +05:00 [INF] Content root path: /Users/shohjahonmurodov/Desktop/SmartPortfolioMonitor
+2026-07-02 10:00:45.250 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/index.html - null null
+2026-07-02 10:00:45.323 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/index.html - 200 null text/html;charset=utf-8 73.7362ms
+2026-07-02 10:00:45.382 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui.css - null null
+2026-07-02 10:00:45.382 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/index.css - null null
+2026-07-02 10:00:45.383 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-bundle.js - null null
+2026-07-02 10:00:45.383 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-standalone-preset.js - null null
+2026-07-02 10:00:45.383 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/index.js - null null
+2026-07-02 10:00:45.385 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/index.js - 200 null application/javascript;charset=utf-8 1.5837ms
+2026-07-02 10:00:45.393 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui.css - 200 26499 text/css 11.4855ms
+2026-07-02 10:00:45.393 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/index.css - 200 152 text/css 10.8741ms
+2026-07-02 10:00:45.408 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-bundle.js - 200 421507 text/javascript 24.8839ms
+2026-07-02 10:00:45.411 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-standalone-preset.js - 200 77731 text/javascript 27.8085ms
+2026-07-02 10:00:46.084 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/v1/swagger.json - null null
+2026-07-02 10:00:46.127 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/favicon-32x32.png - null null
+2026-07-02 10:00:46.130 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/favicon-32x32.png - 200 628 image/png 2.7592ms
+2026-07-02 10:00:46.193 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 108.9995ms
+2026-07-02 10:00:55.551 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/api/Portfolios/1 - null null
+2026-07-02 10:00:55.558 +05:00 [WRN] Failed to determine the https port for redirect.
+2026-07-02 10:00:55.563 +05:00 [INF] Executing endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:00:55.595 +05:00 [INF] Route matched with {action = "GetPortfolioStatus", controller = "Portfolios"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPortfolioStatus(Int32) on controller SmartPortfolioMonitor.Controllers.PortfoliosController (SmartPortfolioMonitor).
+2026-07-02 10:00:55.718 +05:00 [INF] [API] Запрос на аналитику портфеля с ID: 1
+2026-07-02 10:00:55.720 +05:00 [INF] Математик начинает расчет для портфеля 1
+2026-07-02 10:00:56.703 +05:00 [INF] Executed DbCommand (52ms) [Parameters=[@portfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT p0."Id", p0."Name", p0."UserId", t."Id", t."Amount", t."DateTime", t."PortfolioId", t."PricePerUnitUSD", t."Ticker"
+FROM (
+    SELECT p."Id", p."Name", p."UserId"
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @portfolioId
+    LIMIT 1
+) AS p0
+LEFT JOIN "Transactions" AS t ON p0."Id" = t."PortfolioId"
+ORDER BY p0."Id"
+2026-07-02 10:00:56.762 +05:00 [INF] sendin http request to take a price of day of : BTC
+2026-07-02 10:00:56.764 +05:00 [INF] Start processing HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:00:56.765 +05:00 [INF] Sending HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:00:57.207 +05:00 [INF] Received HTTP response headers after 438.6987ms - 200
+2026-07-02 10:00:57.208 +05:00 [INF] End processing HTTP request after 444.604ms - 200
+2026-07-02 10:00:57.210 +05:00 [WRN] API вернул странный ответ для BTC: {"data":{"amount":"60667.965","base":"BTC","currency":"USD"}}
+2026-07-02 10:00:57.211 +05:00 [INF] Расчет портфеля 1 успешно завершен.
+2026-07-02 10:00:57.216 +05:00 [INF] Executing OkObjectResult, writing value of type 'SmartPortfolioMonitor.Dtos.PortfolioStatusDto'.
+2026-07-02 10:00:57.238 +05:00 [INF] Executed action SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor) in 1640.3412ms
+2026-07-02 10:00:57.239 +05:00 [INF] Executed endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:00:57.240 +05:00 [INF] HTTP GET /api/Portfolios/1 responded 200 in 1685.1457 ms
+2026-07-02 10:00:57.244 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/api/Portfolios/1 - 200 null application/json; charset=utf-8 1694.0456ms
+2026-07-02 10:13:43.982 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/api/Portfolios/2 - null null
+2026-07-02 10:13:44.014 +05:00 [INF] Executing endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:13:44.043 +05:00 [INF] Route matched with {action = "GetPortfolioStatus", controller = "Portfolios"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPortfolioStatus(Int32) on controller SmartPortfolioMonitor.Controllers.PortfoliosController (SmartPortfolioMonitor).
+2026-07-02 10:13:44.070 +05:00 [INF] [API] Запрос на аналитику портфеля с ID: 2
+2026-07-02 10:13:44.070 +05:00 [INF] Математик начинает расчет для портфеля 2
+2026-07-02 10:13:44.230 +05:00 [INF] Executed DbCommand (23ms) [Parameters=[@portfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT p0."Id", p0."Name", p0."UserId", t."Id", t."Amount", t."DateTime", t."PortfolioId", t."PricePerUnitUSD", t."Ticker"
+FROM (
+    SELECT p."Id", p."Name", p."UserId"
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @portfolioId
+    LIMIT 1
+) AS p0
+LEFT JOIN "Transactions" AS t ON p0."Id" = t."PortfolioId"
+ORDER BY p0."Id"
+2026-07-02 10:13:44.231 +05:00 [WRN] [API] Портфель 2 не найден в PostgreSQL
+2026-07-02 10:13:44.248 +05:00 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-07-02 10:13:44.269 +05:00 [INF] Executed action SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor) in 224.7777ms
+2026-07-02 10:13:44.269 +05:00 [INF] Executed endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:13:44.269 +05:00 [INF] HTTP GET /api/Portfolios/2 responded 404 in 260.3355 ms
+2026-07-02 10:13:44.270 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/api/Portfolios/2 - 404 null application/json; charset=utf-8 290.0687ms
+2026-07-02 10:14:14.831 +05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5211/api/Portfolios/transaction - application/json 84
+2026-07-02 10:14:14.839 +05:00 [INF] Executing endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.AddTransaction (SmartPortfolioMonitor)'
+2026-07-02 10:14:14.855 +05:00 [INF] Route matched with {action = "AddTransaction", controller = "Portfolios"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddTransaction(SmartPortfolioMonitor.Dtos.TransactionCreateDto) on controller SmartPortfolioMonitor.Controllers.PortfoliosController (SmartPortfolioMonitor).
+2026-07-02 10:14:14.907 +05:00 [INF] [API] Запрос на добавление транзакции для BTC в портфель 1
+2026-07-02 10:14:14.984 +05:00 [INF] Executed DbCommand (6ms) [Parameters=[@dto_PortfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @dto_PortfolioId)
+2026-07-02 10:14:15.072 +05:00 [INF] Executed DbCommand (15ms) [Parameters=[@p0='?' (DbType = Decimal), @p1='?' (DbType = DateTime), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Transactions" ("Amount", "DateTime", "PortfolioId", "PricePerUnitUSD", "Ticker")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2026-07-02 10:14:15.087 +05:00 [INF] [API] Транзакция ID 2 успешно сохранена в Postgres
+2026-07-02 10:14:15.087 +05:00 [INF] Математик начинает расчет для портфеля 1
+2026-07-02 10:14:15.088 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@portfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT p0."Id", p0."Name", p0."UserId", t."Id", t."Amount", t."DateTime", t."PortfolioId", t."PricePerUnitUSD", t."Ticker"
+FROM (
+    SELECT p."Id", p."Name", p."UserId"
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @portfolioId
+    LIMIT 1
+) AS p0
+LEFT JOIN "Transactions" AS t ON p0."Id" = t."PortfolioId"
+ORDER BY p0."Id"
+2026-07-02 10:14:15.091 +05:00 [INF] sendin http request to take a price of day of : BTC
+2026-07-02 10:14:15.093 +05:00 [INF] Start processing HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:14:15.093 +05:00 [INF] Sending HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:14:15.517 +05:00 [INF] Received HTTP response headers after 423.2542ms - 200
+2026-07-02 10:14:15.517 +05:00 [INF] End processing HTTP request after 424.2863ms - 200
+2026-07-02 10:14:15.517 +05:00 [WRN] API вернул странный ответ для BTC: {"data":{"amount":"60748.165","base":"BTC","currency":"USD"}}
+2026-07-02 10:14:15.517 +05:00 [INF] Расчет портфеля 1 успешно завершен.
+2026-07-02 10:14:15.517 +05:00 [INF] Executing OkObjectResult, writing value of type 'SmartPortfolioMonitor.Dtos.PortfolioStatusDto'.
+2026-07-02 10:14:15.517 +05:00 [INF] Executed action SmartPortfolioMonitor.Controllers.PortfoliosController.AddTransaction (SmartPortfolioMonitor) in 662.336ms
+2026-07-02 10:14:15.517 +05:00 [INF] Executed endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.AddTransaction (SmartPortfolioMonitor)'
+2026-07-02 10:14:15.518 +05:00 [INF] HTTP POST /api/Portfolios/transaction responded 200 in 679.6393 ms
+2026-07-02 10:14:15.518 +05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5211/api/Portfolios/transaction - 200 null application/json; charset=utf-8 687.515ms
+2026-07-02 10:14:28.429 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/api/Portfolios/2 - null null
+2026-07-02 10:14:28.435 +05:00 [INF] Executing endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:14:28.436 +05:00 [INF] Route matched with {action = "GetPortfolioStatus", controller = "Portfolios"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPortfolioStatus(Int32) on controller SmartPortfolioMonitor.Controllers.PortfoliosController (SmartPortfolioMonitor).
+2026-07-02 10:14:28.440 +05:00 [INF] [API] Запрос на аналитику портфеля с ID: 2
+2026-07-02 10:14:28.440 +05:00 [INF] Математик начинает расчет для портфеля 2
+2026-07-02 10:14:28.458 +05:00 [INF] Executed DbCommand (14ms) [Parameters=[@portfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT p0."Id", p0."Name", p0."UserId", t."Id", t."Amount", t."DateTime", t."PortfolioId", t."PricePerUnitUSD", t."Ticker"
+FROM (
+    SELECT p."Id", p."Name", p."UserId"
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @portfolioId
+    LIMIT 1
+) AS p0
+LEFT JOIN "Transactions" AS t ON p0."Id" = t."PortfolioId"
+ORDER BY p0."Id"
+2026-07-02 10:14:28.459 +05:00 [WRN] [API] Портфель 2 не найден в PostgreSQL
+2026-07-02 10:14:28.459 +05:00 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-07-02 10:14:28.460 +05:00 [INF] Executed action SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor) in 23.1343ms
+2026-07-02 10:14:28.460 +05:00 [INF] Executed endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:14:28.460 +05:00 [INF] HTTP GET /api/Portfolios/2 responded 404 in 25.5265 ms
+2026-07-02 10:14:28.461 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/api/Portfolios/2 - 404 null application/json; charset=utf-8 32.0567ms
+2026-07-02 10:14:32.444 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/api/Portfolios/1 - null null
+2026-07-02 10:14:32.452 +05:00 [INF] Executing endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:14:32.458 +05:00 [INF] Route matched with {action = "GetPortfolioStatus", controller = "Portfolios"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPortfolioStatus(Int32) on controller SmartPortfolioMonitor.Controllers.PortfoliosController (SmartPortfolioMonitor).
+2026-07-02 10:14:32.460 +05:00 [INF] [API] Запрос на аналитику портфеля с ID: 1
+2026-07-02 10:14:32.460 +05:00 [INF] Математик начинает расчет для портфеля 1
+2026-07-02 10:14:32.462 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@portfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT p0."Id", p0."Name", p0."UserId", t."Id", t."Amount", t."DateTime", t."PortfolioId", t."PricePerUnitUSD", t."Ticker"
+FROM (
+    SELECT p."Id", p."Name", p."UserId"
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @portfolioId
+    LIMIT 1
+) AS p0
+LEFT JOIN "Transactions" AS t ON p0."Id" = t."PortfolioId"
+ORDER BY p0."Id"
+2026-07-02 10:14:32.464 +05:00 [INF] sendin http request to take a price of day of : BTC
+2026-07-02 10:14:32.464 +05:00 [INF] Start processing HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:14:32.464 +05:00 [INF] Sending HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:14:32.613 +05:00 [INF] Received HTTP response headers after 148.9291ms - 200
+2026-07-02 10:14:32.613 +05:00 [INF] End processing HTTP request after 149.6149ms - 200
+2026-07-02 10:14:32.614 +05:00 [WRN] API вернул странный ответ для BTC: {"data":{"amount":"60750.55","base":"BTC","currency":"USD"}}
+2026-07-02 10:14:32.614 +05:00 [INF] Расчет портфеля 1 успешно завершен.
+2026-07-02 10:14:32.614 +05:00 [INF] Executing OkObjectResult, writing value of type 'SmartPortfolioMonitor.Dtos.PortfolioStatusDto'.
+2026-07-02 10:14:32.615 +05:00 [INF] Executed action SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor) in 155.6394ms
+2026-07-02 10:14:32.615 +05:00 [INF] Executed endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:14:32.615 +05:00 [INF] HTTP GET /api/Portfolios/1 responded 200 in 163.6132 ms
+2026-07-02 10:14:32.616 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/api/Portfolios/1 - 200 null application/json; charset=utf-8 171.5706ms
+2026-07-02 10:23:05.321 +05:00 [INF] Application is shutting down...
+2026-07-02 10:23:18.848 +05:00 [INF] Запуск сервера Smart Portfolio Monitor...
+2026-07-02 10:23:18.931 +05:00 [INF] Now listening on: http://localhost:5211
+2026-07-02 10:23:18.934 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-02 10:23:18.934 +05:00 [INF] Hosting environment: Development
+2026-07-02 10:23:18.934 +05:00 [INF] Content root path: /Users/shohjahonmurodov/Desktop/SmartPortfolioMonitor
+2026-07-02 10:23:22.316 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/index.html - null null
+2026-07-02 10:23:22.391 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/index.html - 304 null null 76.1635ms
+2026-07-02 10:23:22.736 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui.css - null null
+2026-07-02 10:23:22.736 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/index.js - null null
+2026-07-02 10:23:22.736 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/index.css - null null
+2026-07-02 10:23:22.738 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-standalone-preset.js - null null
+2026-07-02 10:23:22.738 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/index.js - 304 null null 2.9211ms
+2026-07-02 10:23:22.739 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-bundle.js - null null
+2026-07-02 10:23:22.743 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/index.css - 304 null null 7.3512ms
+2026-07-02 10:23:22.743 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui.css - 304 null null 7.8617ms
+2026-07-02 10:23:22.744 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-standalone-preset.js - 304 null null 6.2918ms
+2026-07-02 10:23:22.751 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/swagger-ui-bundle.js - 304 null null 11.3661ms
+2026-07-02 10:23:23.500 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/v1/swagger.json - null null
+2026-07-02 10:23:23.547 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/swagger/favicon-32x32.png - null null
+2026-07-02 10:23:23.548 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/favicon-32x32.png - 304 null null 0.5958ms
+2026-07-02 10:23:23.611 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 110.6586ms
+2026-07-02 10:23:29.977 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5211/api/Portfolios/1 - null null
+2026-07-02 10:23:30.001 +05:00 [WRN] Failed to determine the https port for redirect.
+2026-07-02 10:23:30.005 +05:00 [INF] Executing endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:23:30.030 +05:00 [INF] Route matched with {action = "GetPortfolioStatus", controller = "Portfolios"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPortfolioStatus(Int32) on controller SmartPortfolioMonitor.Controllers.PortfoliosController (SmartPortfolioMonitor).
+2026-07-02 10:23:30.153 +05:00 [INF] [API] Запрос на аналитику портфеля с ID: 1
+2026-07-02 10:23:30.155 +05:00 [INF] Математик начинает расчет для портфеля 1
+2026-07-02 10:23:30.975 +05:00 [INF] Executed DbCommand (38ms) [Parameters=[@portfolioId='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT p0."Id", p0."Name", p0."UserId", t."Id", t."Amount", t."DateTime", t."PortfolioId", t."PricePerUnitUSD", t."Ticker"
+FROM (
+    SELECT p."Id", p."Name", p."UserId"
+    FROM "Portfolios" AS p
+    WHERE p."Id" = @portfolioId
+    LIMIT 1
+) AS p0
+LEFT JOIN "Transactions" AS t ON p0."Id" = t."PortfolioId"
+ORDER BY p0."Id"
+2026-07-02 10:23:31.035 +05:00 [INF] sendin http request to take a price of day of : BTC
+2026-07-02 10:23:31.037 +05:00 [INF] Start processing HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:23:31.038 +05:00 [INF] Sending HTTP request GET https://api.coinbase.com/v2/prices/BTC-USD/spot
+2026-07-02 10:23:31.537 +05:00 [INF] Received HTTP response headers after 495.6147ms - 200
+2026-07-02 10:23:31.538 +05:00 [INF] End processing HTTP request after 501.9242ms - 200
+2026-07-02 10:23:31.542 +05:00 [INF] price for : BTC successfully got : 60729.495
+2026-07-02 10:23:31.544 +05:00 [INF] Расчет портфеля 1 успешно завершен.
+2026-07-02 10:23:31.549 +05:00 [INF] Executing OkObjectResult, writing value of type 'SmartPortfolioMonitor.Dtos.PortfolioStatusDto'.
+2026-07-02 10:23:31.574 +05:00 [INF] Executed action SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor) in 1541.1484ms
+2026-07-02 10:23:31.574 +05:00 [INF] Executed endpoint 'SmartPortfolioMonitor.Controllers.PortfoliosController.GetPortfolioStatus (SmartPortfolioMonitor)'
+2026-07-02 10:23:31.576 +05:00 [INF] HTTP GET /api/Portfolios/1 responded 200 in 1591.1627 ms
+2026-07-02 10:23:31.581 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5211/api/Portfolios/1 - 200 null application/json; charset=utf-8 1603.8845ms
+2026-07-02 10:41:17.583 +05:00 [INF] Application is shutting down...

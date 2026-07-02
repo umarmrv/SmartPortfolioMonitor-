@@ -25,7 +25,7 @@ public class PriceFetcherService : IPriceFetcherService
 
         try
         {
-            var url = $"data/price?fsym={ticker.ToUpper()}&tsyms=USD";
+            var url = $"https://api.coinbase.com/v2/prices/{ticker.ToUpper()}-USD/spot";
 
             var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode(); // if server return error 500 or 404 it will go the catch
@@ -37,17 +37,27 @@ public class PriceFetcherService : IPriceFetcherService
 
             using var doc = JsonDocument.Parse(jsonString);
 
-            if (doc.RootElement.TryGetProperty("USD", out var priceElement))
+                // 1.Сначала заходим в объект "data"
+            if (doc.RootElement.TryGetProperty("data", out var dataElement))
             {
-                decimal price = priceElement.GetDecimal();
-                _logger.LogInformation("price for : {ticker} successfully got : {price}", ticker, price);
-                return price;
+                // 2. Внутри "data" ищем свойство "amount"
+                if (dataElement.TryGetProperty("amount", out var amountElement))
+                {
+                    // 3. Так как Coinbase возвращает цену в виде строки "60750.55", 
+                    // сначала берем её как string, а потом парсим в decimal
+                    string priceStr = amountElement.GetString() ?? "0";
+
+                    if (decimal.TryParse(priceStr, System.Globalization.CultureInfo.InvariantCulture, out var price))
+                    {
+                        _logger.LogInformation("price for : {ticker} successfully got : {price}", ticker, price);
+                        return price;
+                    }
+                }
             }
-            
-            _logger.LogWarning("API вернул странный ответ для {Ticker}: {Json}", ticker, jsonString);
+
+// Если что-то пошло не так, пишем лог и возвращаем 0
+            _logger.LogWarning("API вернул странный ответ для {ticker}: {json}", ticker, jsonString);
             return 0m;
-            
-            
         }
 
         catch (Exception ex)

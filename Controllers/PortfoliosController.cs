@@ -100,4 +100,21 @@ public class PortfoliosController : ControllerBase
             return StatusCode(500, new { message = "Не удалось сохранить транзакцию в базу данных." });
         }
     }
+    
+    // POST: api/portfolios
+    [HttpPost]
+    public async Task<IActionResult> CreatePortfolio([FromBody] string name)
+    {
+        // Так как юзер с ID 1 у нас уже точно сидирован миграцией в базе
+        var portfolio = new Portfolio 
+        { 
+            Name = name, 
+            UserId = 1 
+        };
+
+        _context.Portfolios.Add(portfolio);
+        await _context.SaveChangesAsync();
+
+        return Ok(portfolio);
+    }
 }
