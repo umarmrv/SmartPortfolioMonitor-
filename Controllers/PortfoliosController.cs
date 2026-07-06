@@ -7,6 +7,9 @@ using SmartPortfolioMonitor.Services.Interfaces;
 
 namespace SmartPortfolioMonitor.Controllers;
 
+
+
+//==================================================================================================================
 [ApiController]
 [Route("api/[controller]")]
 public class PortfoliosController : ControllerBase
@@ -23,8 +26,9 @@ public class PortfoliosController : ControllerBase
         _portfolioService = portfolioService;
         _context = context;
         _logger = logger;
-    }
-
+    } 
+    
+    //==================================================================================================================
     // 1. GET: api/portfolios/1
     // Возвращает полную аналитику: считает баланс и показывает, богатеет ли юзер
     [HttpGet("{id}")]
@@ -51,6 +55,8 @@ public class PortfoliosController : ControllerBase
         }
     }
 
+    //==================================================================================================================
+    
     // 2. POST: api/portfolios/transaction
     // Позволяет докупить доллары, сомони или крипту. Данные изменятся динамически!
     [HttpPost("transaction")]
@@ -100,6 +106,13 @@ public class PortfoliosController : ControllerBase
             return StatusCode(500, new { message = "Не удалось сохранить транзакцию в базу данных." });
         }
     }
+    //==================================================================================================================
+    
+    
+    
+    
+    
+    //==================================================================================================================
     
     // POST: api/portfolios
     [HttpPost]
@@ -117,4 +130,55 @@ public class PortfoliosController : ControllerBase
 
         return Ok(portfolio);
     }
+    
+    
+    //=================================================================================================================
+    
+    
+    //=================================================================================================================
+    [HttpPut("{id:int}")] // Означает, что маршрут будет: PUT /api/Portfolios/1
+    public async Task<IActionResult> UpdatePortfolio(
+        [FromRoute] int id,                  // (1) ID берется строго из URL-строки
+        [FromBody] PortfolioUpdateDto dto   // (2) Данные (новое имя) берутся строго из JSON-тела
+    )
+    {
+        _logger.LogInformation("[API] Запрос на обновление портфеля с ID: {Id}", id);
+
+        // Вызываем сервис и передаем туда оба параметра
+        var isUpdated = await _portfolioService.UpdatePortfolioAsync(id, dto);
+
+        if (!isUpdated)
+        {
+            // Если сервис вернул false, отдаем 404 Not Found
+            return NotFound(new { message = $"Портфель с ID {id} не найден." });
+        }
+
+        // Для PUT-запросов хорошим тоном считается возвращать 204 No Content (успешно, но без тела ответа)
+        // Либо можно вернуть Ok(new { message = "Обновлено успешно" })
+        return NoContent(); 
+    }
+    //=================================================================================================================
+    
+    //Delete portfolio
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeletePortfolio([FromRoute] int id)
+    {
+        _logger.LogInformation("[API] Запрос на удаление портфеля с ID: {Id}", id);
+
+        // Вызываем сервис для удаления
+        var isDeleted = await _portfolioService.DeletePortfolioAsync(id);
+
+        if (!isDeleted)
+        {
+            // Если портфеля не было, возвращаем 404
+            return NotFound(new { message = $"Портфель с ID {id} не найден." });
+        }
+
+        // При успешном удалении стандарт REST требует возвращать 204 No Content
+        // (запрос выполнен успешно, но возвращать в ответе больше нечего, сущности больше нет)
+        return NoContent();
+    }
+    
+    
+    
 }

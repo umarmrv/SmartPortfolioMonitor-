@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartPortfolioMonitor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6032a685fdc90045ae1a476e6f7138d4fe387fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+633b4022ed701d38a2227200c3b480db721ba74e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartPortfolioMonitor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartPortfolioMonitor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

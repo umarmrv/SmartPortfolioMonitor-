@@ -6,4 +6,13 @@ public interface IPortfolioService
 {
     // Этот метод будет возвращать готовый DTO-отчет с аналитикой портфеля
     Task<PortfolioStatusDto?> GetPortfolioStatusAsync(int portfolioId);
+    
+    
+    // Новый метод для PUT-запроса
+    Task<bool> UpdatePortfolioAsync(int id, PortfolioUpdateDto dto);
+    
+    // Метод для удаления портфеля
+    Task<bool> DeletePortfolioAsync(int id);
+
+    
 }

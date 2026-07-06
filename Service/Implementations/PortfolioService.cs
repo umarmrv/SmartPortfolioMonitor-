@@ -19,6 +19,10 @@ public class PortfolioService : IPortfolioService
         _logger = logger;
     }
 
+    
+    
+    //For GETting Profile Status inside we used other service  Http getter which will get info from APi
+    //==================================================================================================================
     public async Task<PortfolioStatusDto?> GetPortfolioStatusAsync(int portfolioId)
     {
         _logger.LogInformation("Математик начинает расчет для портфеля {PortfolioId}", portfolioId);
@@ -97,4 +101,61 @@ public class PortfolioService : IPortfolioService
         
         return statusDto;
     }
+    
+    
+    
+    // Service method wich will update Profile table name space 
+    //==================================================================================================================
+    public async Task<bool> UpdatePortfolioAsync(int id, PortfolioUpdateDto dto)
+    {
+        // 1. Ищем портфель в базе по ID
+        var portfolio = await _context.Portfolios.FindAsync(id);
+    
+        // Если портфель не найден, возвращаем false, чтобы контроллер выдал 404
+        if (portfolio == null)
+        {
+            _logger.LogWarning("Попытка обновить несуществующий портфель с ID: {Id}", id);
+            return false;
+        }
+
+        // 2. Обновляем свойства из DTO
+        portfolio.Name = dto.Name;
+
+        // 3. Сохраняем изменения в Postgres
+        await _context.SaveChangesAsync();
+    
+        _logger.LogInformation("Портфель с ID: {Id} успешно обновлен. Новое имя: {Name}", id, dto.Name);
+        return true;
+    }
+    
+    
+    
+    public async Task<bool> DeletePortfolioAsync(int id)
+    {
+        // 1. Ищем портфель в базе данных по ID
+        var portfolio = await _context.Portfolios.FindAsync(id);
+    
+        // Если такого портфеля нет, возвращаем false
+        if (portfolio == null)
+        {
+            _logger.LogWarning("Попытка удалить несуществующий портфель с ID: {Id}", id);
+            return false;
+        }
+
+        // 2. Командуем EF Core удалить объект
+        _context.Portfolios.Remove(portfolio);
+
+        // 3. Фиксируем удаление в PostgreSQL (сгенерируется SQL-команда DELETE FROM)
+        await _context.SaveChangesAsync();
+
+        _logger.LogInformation("Портфель с ID: {Id} был успешно удален из базы данных", id);
+        return true;
+    }
+    
+    
+    
+    
+    
+    
+    
 }
